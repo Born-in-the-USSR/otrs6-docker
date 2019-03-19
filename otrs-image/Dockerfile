@@ -11,6 +11,7 @@ ENV OTRS_SKINS_MOUNT_DIR "/skins/"
 ENV SKINS_PATH "${OTRS_ROOT}/var/httpd/htdocs/skins/"
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
 
 #add user
 #USER otrs 
