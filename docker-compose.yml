@@ -15,6 +15,7 @@ services:
     depends_on:
       - db
       - smtp
+#      - pbx
     env_file: .env
     volumes:
       - './volumes/config:/opt/otrs/Kernel'
@@ -37,3 +38,8 @@ services:
     expose:
       - '25'
     env_file: .env
+#  pbx:
+#    image: dougbtv/asterisk
+#    expose:
+#      - '4573'
+#   env_file: .env
