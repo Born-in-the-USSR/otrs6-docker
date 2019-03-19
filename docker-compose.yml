@@ -18,11 +18,11 @@ services:
     env_file: .env
     volumes:
       - './volumes/config:/opt/otrs/Kernel'
-      - ./volumes/skins:/opt/otrs/var/httpd/htdocs/skins/
+      - './volumes/skins:/opt/otrs/var/httpd/htdocs/skins/'
       - './volumes/backup:/var/otrs/backups'
       - '/etc/localtime:/etc/localtime:ro'
   db:
-    image: mysql:5.7 
+    image: percona
     restart: always
     expose:
       - "3306"
@@ -36,5 +36,4 @@ services:
     restart: always
     expose:
       - '25'
-    # 
     env_file: .env
