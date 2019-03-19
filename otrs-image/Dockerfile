@@ -21,8 +21,8 @@ ENV LC_ALL=en_US.UTF-8
 #RUN /usr/sbin/locale-gen "en_US.UTF-8" && /usr/sbin/dpkg-reconfigure locales
 RUN apt update
 RUN apt install apt-utils locales -y
-RUN /usr/sbin/locale-gen "en_US.UTF-8" && /usr/sbin/dpkg-reconfigure locales
-
+RUN /usr/sbin/locale-gen "en_US.UTF-8" && echo "locales changed"
+#RUN /usr/sbin/locale-gen "en_US.UTF-8" && /usr/sbin/dpkg-reconfigure locales && echo "locales changed"
 
 RUN apt update && apt install libdigest-md5-perl git \
     libapache2-mod-perl2 libdbd-mysql-perl libtimedate-perl libnet-dns-perl libnet-ldap-perl \
