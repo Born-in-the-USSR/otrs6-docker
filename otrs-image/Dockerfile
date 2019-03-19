@@ -5,7 +5,7 @@ MAINTAINER Pavel Fomichev <p.n.fomichev@gmail.com>
 ENV OTRS_GIT "https://github.com/OTRS/otrs.git"
 ENV OTRS_ROOT "/opt/otrs/"
 ENV OTRS_BACKUP_DIR "/var/otrs/backups"
-ENV OTRS_CONFIG_DIR "${OTRS_ROOT}Kernel"
+#ENV OTRS_CONFIG_DIR "${OTRS_ROOT}Kernel"
 ENV OTRS_CONFIG_MOUNT_DIR "/config/"
 ENV OTRS_SKINS_MOUNT_DIR "/skins/"
 ENV SKINS_PATH "${OTRS_ROOT}/var/httpd/htdocs/skins/"
@@ -26,7 +26,19 @@ RUN apt update && apt install libdigest-md5-perl git \
 
 # Add scripts and function files
 #COPY *.sh /
-RUN mkdir $OTRS_ROOT && cd $OTRS_ROOT && git clone $OTRS_GIT
+#RUN mkdir $OTRS_ROOT && cd $OTRS_ROOT && git clone $OTRS_GIT
+COPY ./otrs $OTRS_ROOT
+
+#Activate Default Config File
+RUN cp $OTRS_ROOT/Kernel/Config.pm.dist $OTRS_ROOT/Kernel/Config.pm
+
+#check perl modules
+RUN perl -cw $OTRS_ROOT/bin/cgi-bin/index.pl && perl -cw $OTRS_ROOT/bin/cgi-bin/customer.pl && perl -cw $OTRS_ROOT/bin/otrs.Console.pl
+
+
+#install apache
+RUN apt install apache2 libapache2-mod-perl2 -y
+
 
 EXPOSE 80
 #CMD ["/run.sh"]
