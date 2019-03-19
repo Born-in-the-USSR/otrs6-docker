@@ -26,7 +26,7 @@ RUN apt update && apt install libdigest-md5-perl git \
 
 # Add scripts and function files
 #COPY *.sh /
-RUN cd OTRS_ROOT && git clone OTRS_GIT
+RUN mkdir $OTRS_ROOT && cd $OTRS_ROOT && git clone $OTRS_GIT
 
 EXPOSE 80
 #CMD ["/run.sh"]
