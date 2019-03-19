@@ -1,0 +1,40 @@
+version: '3.3'
+
+services:
+  otrs:
+    # https://hub.docker.com/_/ubuntu
+    image: ubuntu:latest
+    restart: always
+    build: otrs
+    ports:
+      - '80:80'
+    # If running behind a proxy container, expose the ports instead
+    # and link the proxy container to this one.
+    #  expose:
+    #  - "80"
+    depends_on:
+      - db
+      - smtp
+    env_file: .env
+    volumes:
+      - './volumes/config:/opt/otrs/Kernel'
+      - ./volumes/skins:/opt/otrs/var/httpd/htdocs/skins/
+      - './volumes/backup:/var/otrs/backups'
+      - '/etc/localtime:/etc/localtime:ro'
+  db:
+    image: mysql:5.7 
+    restart: always
+    expose:
+      - "3306"
+    env_file: .env
+    volumes:
+      - './volumes/mysql:/var/lib/mysql'
+      - '/etc/localtime:/etc/localtime:ro'
+  smtp:
+    # https://hub.docker.com/r/namshi/smtp
+    image: namshi/smtp:latest
+    restart: always
+    expose:
+      - '25'
+    # 
+    env_file: .env
