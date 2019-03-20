@@ -30,7 +30,7 @@ services:
     env_file: .env
     volumes:
       - './volumes/mysql:/var/lib/mysql'
-      - '/etc/localtime:/etc/localtime:ro'
+      # - '/etc/localtime:/etc/localtime:ro'
   smtp:
     # https://hub.docker.com/r/namshi/smtp
     image: namshi/smtp:latest

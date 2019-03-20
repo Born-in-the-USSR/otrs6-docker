@@ -17,8 +17,8 @@ ENV LC_ALL=en_US.UTF-8
 
 #add user
 #USER otrs 
-#RUN useradd -d ${OTRS_ROOT} -c 'OTRS user' otrs && usermod -G www-data otrs
-RUN echo otrrs root directory: ${OTRS_ROOT}
+RUN useradd -d ${OTRS_ROOT} -c 'OTRS user' otrs && usermod -G www-data otrs
+RUN echo OTRS root directory: ${OTRS_ROOT}
 
 #fix locale
 #RUN /usr/sbin/locale-gen "en_US.UTF-8" && /usr/sbin/dpkg-reconfigure locales
@@ -57,12 +57,11 @@ RUN apt install apache2 libapache2-mod-perl2 -y
 #configure apache
 RUN ln -s ${OTRS_ROOT}scripts/apache2-httpd.include.conf /etc/apache2/sites-enabled/zzz_otrs.conf
 
+#list apache modules
+#RUN apachectl -M 
+
 #enable apache modules
-RUN a2enmod perl
-RUN a2enmod version
-RUN a2enmod deflate
-RUN a2enmod filter
-RUN a2enmod headers
+RUN a2enmod perl && a2enmod deflate && a2enmod filter && a2enmod headers
 
 #restart apache
 RUN service apache2 restart
