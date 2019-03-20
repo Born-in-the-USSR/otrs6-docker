@@ -29,7 +29,7 @@ RUN apt update && apt install libdigest-md5-perl git \
     libio-socket-ssl-perl libpdf-api2-perl libdbd-mysql-perl libsoap-lite-perl libtext-csv-xs-perl \
     libjson-xs-perl libapache-dbi-perl libxml-libxml-perl libxml-libxslt-perl libyaml-perl \
     libarchive-zip-perl libcrypt-eksblowfish-perl libencode-hanextra-perl libmail-imapclient-perl \
-    libtemplate-perl libdatetime-perl libcrypt-ssleay-perl -y
+    libtemplate-perl libcrypt-ssleay-perl -y
 
 
 
